@@ -12,3 +12,18 @@
 
 
 # Introduction
+
+
+# VisualBanana
+
+
+# Rainbow DQN - The algorithm
+
+
+# Training
+
+
+# Results & Discussion
+
+
+# Future Work
