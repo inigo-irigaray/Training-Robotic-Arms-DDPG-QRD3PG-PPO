@@ -11,19 +11,19 @@
 **5. Future work.**
 
 ---------
-# Introduction
+## Introduction
 
 
-# VisualBanana
+## VisualBanana
 
 
-# Rainbow DQN - The algorithm
+## Rainbow DQN - The algorithm
 
 
-# Training
+## Training
 
 
-# Results & Discussion
+## Results & Discussion
 
 
-# Future Work
+## Future Work
