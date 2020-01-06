@@ -11,6 +11,19 @@
 
 <p align=justify><b><a href=https://github.com/inigo-irigaray/NLP-seq2seq-with-DeepRL#4-future-work>4. A-PPO.</a></b> Explores potential avenues of interest for future experiments.</p>
 
+<p align=justify><b><a href=https://github.com/inigo-irigaray/NLP-seq2seq-with-DeepRL#4-future-work>4. Comparative Analysis.</a></b> Compares the strengths and performance of the three algorithms training robotic arms.</p>
 
 ---------
 ## 1. Preliminaries
+
+## 2. DDPG
+
+## 3. D4PG
+
+## 4. Aynchronous PPO
+
+## 5. A Comparative Analysis of the Models
+
+## 6. Future Work
+
+## References
