@@ -9,7 +9,7 @@
 
 <b><a href=https://github.com/inigo-irigaray/NLP-seq2seq-with-DeepRL#3-training--results>3. D4PG.</a></b> Analyzes the limitations on DDPG and the improvements introduced to reach the Distributed Distributional Deep Deterministic Policy Gradients (D4PG) algorithm, as well as its performance on this environment.</p>
 
-<b><a href=https://github.com/inigo-irigaray/NLP-seq2seq-with-DeepRL#4-future-work>4. APPO.</a></b> Explores potential avenues of interest for future experiments.</p>
+<b><a href=https://github.com/inigo-irigaray/NLP-seq2seq-with-DeepRL#4-future-work>4. A-PPO.</a></b> Explores potential avenues of interest for future experiments.</p>
 
 
 ---------
