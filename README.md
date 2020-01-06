@@ -9,7 +9,7 @@
 
 <p align=justify><b><a href=https://github.com/inigo-irigaray/Parallel-Training-Robotic-Arms-DDPG-D4PG-APPO/blob/master/README.md#3-d4pg>3. D4PG.</a></b> Analyzes the limitations on DDPG and the improvements introduced to reach the Distributed Distributional Deep Deterministic Policy Gradients (D4PG) algorithm, as well as its performance on this environment.</p>
 
-<p align=justify><b><a href=https://github.com/inigo-irigaray/NLP-seq2seq-with-DeepRL#4-future-work>4. A-PPO.</a></b> Explores potential avenues of interest for future experiments.</p>
+<p align=justify><b><a href=https://github.com/inigo-irigaray/Parallel-Training-Robotic-Arms-DDPG-D4PG-APPO/blob/master/README.md#4-asynchronous-ppo>4. A-PPO.</a></b> Explores potential avenues of interest for future experiments.</p>
 
 <p align=justify><b><a href=https://github.com/inigo-irigaray/NLP-seq2seq-with-DeepRL#4-future-work>4. Comparative Analysis.</a></b> Compares the strengths and performance of the three algorithms training robotic arms.</p>
 
