@@ -20,7 +20,7 @@
 
 ## 3. D4PG
 
-## 4. Aynchronous PPO
+## 4. Asynchronous PPO
 
 ## 5. A Comparative Analysis of the Models
 
