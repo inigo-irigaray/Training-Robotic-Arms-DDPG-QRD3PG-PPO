@@ -13,7 +13,7 @@
 
 <p align=justify><b><a href=https://github.com/inigo-irigaray/Parallel-Training-Robotic-Arms-DDPG-D4PG-APPO/blob/master/README.md#5-a-comparative-analysis-of-the-models>5. Comparative Analysis.</a></b> Compares the strengths and performance of the three algorithms training robotic arms.</p>
 
-<p align=justify><b><a href=https://github.com/inigo-irigaray/Parallel-Training-Robotic-Arms-DDPG-D4PG-APPO/blob/master/README.md#5-a-comparative-analysis-of-the-models>6. Future Work.</a></b> Explores potential avenues of interest for future experiments.</p>
+<p align=justify><b><a href=https://github.com/inigo-irigaray/Parallel-Training-Robotic-Arms-DDPG-D4PG-APPO/blob/master/README.md#6-future-work>6. Future Work.</a></b> Explores potential avenues of interest for future experiments.</p>
 
 ---------
 ## 1. Preliminaries
