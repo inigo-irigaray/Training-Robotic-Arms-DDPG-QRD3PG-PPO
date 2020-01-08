@@ -38,11 +38,13 @@
 
 #### PrioBuffer
 
-·
+· Minor relevant impact on a standalone basis, blends well with other improvements down the line to significantly impact the algorithms' performance
 
 #### NoNorm vs BatchNorm vs LayerNorm
 
-·
+· BatchNorm not blending well with priobuffer
+
+· LayerNorm on 1st layer of Actor & Critic -- remarkable positive impact wrt NoNorm. on more layers leads to overkill, strong deterioration of training
 
 #### Multi-Training Every X t-steps
 
