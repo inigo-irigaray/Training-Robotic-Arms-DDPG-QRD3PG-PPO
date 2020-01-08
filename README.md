@@ -24,7 +24,7 @@
 
 #### Policy Gradients: Actor-Critic
 
-· 
+· Actor-critic target deterministic policy through gradient ascent learns from exploration online algorithm
 
 #### Exploration: OUNoise vs RandomNoise
 
