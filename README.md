@@ -58,11 +58,11 @@
 
 #### N-step
 
-·
+· Implement step unrolling with reward discounting --> has shown positive effects for other envs
 
 #### Ray Parallelization
 
-·
+· TO DO
 
 ## 4. Asynchronous PPO
 
