@@ -72,6 +72,10 @@
 
 · Implementation in this PPO version and effects
 
+#### Asynchronous PPO
+
+· TO DO: Ray implementation --> empiric results compared to PPO (NOTE: not always positive on performance in other environments)
+
 ## 5. A Comparative Analysis of the Models
 
 ## 6. Future Work
