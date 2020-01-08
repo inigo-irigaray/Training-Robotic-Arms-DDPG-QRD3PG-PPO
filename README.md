@@ -58,6 +58,12 @@
 
 ## 4. Asynchronous PPO
 
+· Description of Proximal Policy Optimization and specifics of this implementation
+
+#### Generalized Advantage Estimation
+
+· Implementation in this PPO version and effects
+
 ## 5. A Comparative Analysis of the Models
 
 ## 6. Future Work
