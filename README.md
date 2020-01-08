@@ -20,7 +20,21 @@
 
 ## 2. DDPG
 
+#### Policy Gradients: Actor-Critic
+
+#### Exploration: OUNoise vs RandomNoise
+
 ## 3. D4PG
+
+#### NoNorm vs BatchNorm vs LayerNorm
+
+#### PrioBuffer
+
+#### Distributional
+
+#### N-step
+
+#### Ray Parallelization
 
 ## 4. Asynchronous PPO
 
