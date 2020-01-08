@@ -83,3 +83,31 @@
 ## 6. Future Work
 
 ## References
+
+PAPERS:
+
+DPG
+
+DDPG
+
+C51(ADistributionalPerspective.......)
+
+QR
+
+IQN
+
+D4PG
+
+PPO
+
+GAE
+
+BatchNorm
+
+LayerNorm
+
+PrioBuff
+
+AcceleratedMethods4RL -- Ray implem
+
+IMPALA: Scalable.....
