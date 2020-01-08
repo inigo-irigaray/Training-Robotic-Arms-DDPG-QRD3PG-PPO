@@ -20,7 +20,7 @@
 
 · Describe the environment
 
-· Present an overview of DRL
+· Present an overview of DRL policy gradients
 
 ## 2. DDPG
 
