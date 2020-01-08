@@ -44,6 +44,10 @@
 
 ·
 
+#### Multi-Training Every X t-steps
+
+· Strong robust episode scores early-on BUT at the expense of time (running 10 training steps every 20 timesteps was prohibitively time-consuming, 4 training steps was better, but still takes a lot longer than 1 training step every timestep ----> hints at benefits of parallelization of learning==MORE learning + LESS time)
+
 #### Distributional
 
 ·
