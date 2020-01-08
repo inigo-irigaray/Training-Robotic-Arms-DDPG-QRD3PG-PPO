@@ -50,7 +50,11 @@
 
 #### Distributional
 
-·
+· Implementation of C51 effects in progress
+
+· TO DO: try quantile regression distribution.
+
+· TO DO: Research Implicit Quantile Networks.
 
 #### N-step
 
