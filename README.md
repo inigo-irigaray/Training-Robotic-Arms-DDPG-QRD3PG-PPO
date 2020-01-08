@@ -18,6 +18,10 @@
 ---------
 ## 1. Preliminaries
 
+· Describe the environment
+
+· Present an overview of DRL
+
 ## 2. DDPG
 
 · Description of Deep Deterministic Policy Gradients based on research paper + specific implementation of the code
