@@ -20,9 +20,16 @@
 
 ## 2. DDPG
 
+· Description of Deep Deterministic Policy Gradients based on research paper + specific implementation of the code
+
 #### Policy Gradients: Actor-Critic
 
+· 
+
 #### Exploration: OUNoise vs RandomNoise
+
+ · Conventional: Ornstein-Uhlenbeck Noise adds stochasticity and randomness to deterministic model for exploration
+ · Random Noise: Adds simplicity and readability to the code, after empirical tests NO DETERIORATION of training --- Preferred choice
 
 ## 3. D4PG
 
