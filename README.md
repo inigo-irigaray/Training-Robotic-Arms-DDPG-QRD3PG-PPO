@@ -34,15 +34,27 @@
 
 ## 3. D4PG
 
-#### NoNorm vs BatchNorm vs LayerNorm
+· 
 
 #### PrioBuffer
 
+·
+
+#### NoNorm vs BatchNorm vs LayerNorm
+
+·
+
 #### Distributional
+
+·
 
 #### N-step
 
+·
+
 #### Ray Parallelization
+
+·
 
 ## 4. Asynchronous PPO
 
