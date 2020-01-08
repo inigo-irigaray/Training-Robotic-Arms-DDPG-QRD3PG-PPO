@@ -34,7 +34,7 @@
 
 ## 3. D4PG
 
-· 
+· Overview of weaknesses of DDPG implementation in the previous section and room for improvements tested and discussed in following points that lead to this project's D4PG implementation
 
 #### PrioBuffer
 
@@ -64,7 +64,7 @@
 
 #### Ray Parallelization
 
-· TO DO
+· TO DO implement ray rllib parallelization with remote actors tasks and learners and test empirically how well it blends with this particular environment
 
 ## 4. Asynchronous PPO
 
