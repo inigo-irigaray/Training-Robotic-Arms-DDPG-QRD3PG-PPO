@@ -18,6 +18,14 @@
 ---------
 ## 1. Preliminaries
 
+### Environment
+
+<p align=justify>In this environment, a double-jointed arm can move to target locations. A reward of +0.1 is provided for each step that the agent's hand is in the goal location. Thus, the goal of your agent is to maintain its position at the target location for as many time steps as possible.</p>
+
+<p align=justify>The observation space consists of 33 variables corresponding to position, rotation, velocity, and angular velocities of the arm. Each action is a vector with four numbers, corresponding to torque applicable to two joints. Every entry in the action vector should be a number between -1 and 1.</p>
+
+<p align=justify> The environment consists of 20 agents acting simultaneously, each corresponding to a robotic arm. The agents must get an average score of +30 (over 100 consecutive episodes, and over all agents). Specifically, fter each episode, we add up the rewards that each agent received (without discounting), to get a score for each agent. This yields 20 (potentially different) scores. We then take the average of these 20 scores. This yields an average score for each episode (where the average is over all 20 agents).</p>
+
 · Describe the environment
 
 · Present an overview of DRL policy gradients
