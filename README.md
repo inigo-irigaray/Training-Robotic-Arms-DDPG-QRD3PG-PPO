@@ -40,22 +40,22 @@
  
  ### Requirements
 
-tensorflow==1.7.1
-Pillow>=4.2.1
-matplotlib
-numpy>=1.11.0
-jupyter
-pytest>=3.2.2
-docopt
-pyyaml
-protobuf==3.5.2
-grpcio==1.11.0
-torch==0.4.0
-pandas
-scipy
-ipykernel
-tensorboardX==1.4
-unityagents
+    tensorflow==1.7.1
+    Pillow>=4.2.1
+    matplotlib
+    numpy>=1.11.0
+    jupyter
+    pytest>=3.2.2
+    docopt
+    pyyaml
+    protobuf==3.5.2
+    grpcio==1.11.0
+    torch==0.4.0
+    pandas
+    scipy
+    ipykernel
+    tensorboardX==1.4
+    unityagents
 
 · Present an overview of DRL policy gradients
 
