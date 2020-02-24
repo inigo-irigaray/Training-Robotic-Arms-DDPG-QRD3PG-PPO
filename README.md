@@ -26,7 +26,19 @@
 
 <p align=justify> The environment consists of 20 agents acting simultaneously, each corresponding to a robotic arm. The agents must get an average score of +30 (over 100 consecutive episodes, and over all agents). Specifically, fter each episode, we add up the rewards that each agent received (without discounting), to get a score for each agent. This yields 20 (potentially different) scores. We then take the average of these 20 scores. This yields an average score for each episode (where the average is over all 20 agents).</p>
 
-· Describe the environment
+<p align=justify>The environment can be installed from the following links:</p>
+ 
+ · <a href=https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Linux.zip>Linux</a>
+ 
+ · <a href=https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher.app.zip>MacOS</a>
+ 
+ · <a href=https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Windows_x86.zip>Windows(32-bit)</a>
+ 
+ · <a href=https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Windows_x86_64.zip>Windows(64-bit)</a>
+ 
+ · <a href=https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Linux_NoVis.zip>AWS(headless)</a>
+ 
+ ### Requirements
 
 · Present an overview of DRL policy gradients
 
