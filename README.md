@@ -7,13 +7,19 @@
 
 <p align=justify><b><a href=https://github.com/inigo-irigaray/Parallel-Training-Robotic-Arms-DDPG-D4PG-APPO/blob/master/README.md#2-ddpg>2. DDPG.</a></b> Explains in detail the Deep Deterministic Policy Gradients algorithm, analyzes its performance training robotic arms for this environment, as well as some changes implemented on the baseline algorithm.</p>
 
-<p align=justify><b><a href=https://github.com/inigo-irigaray/Parallel-Training-Robotic-Arms-DDPG-D4PG-APPO/blob/master/README.md#3-d4pg>3. D4PG.</a></b> Analyzes the limitations on DDPG and the improvements introduced to reach the Distributed Distributional Deep Deterministic Policy Gradients (D4PG) algorithm, as well as its performance on this environment.</p>
+<p align=justify><b><a href=https://github.com/inigo-irigaray/Parallel-Training-Robotic-Arms-DDPG-D4PG-APPO/blob/master/README.md#3-qr-d3pg>3. QR-D3PG.</a></b> </p>
 
-<p align=justify><b><a href=https://github.com/inigo-irigaray/Parallel-Training-Robotic-Arms-DDPG-D4PG-APPO/blob/master/README.md#4-asynchronous-ppo>4. A-PPO.</a></b> Implements an asynchronous version of the Proximal Policy Optimization (A-PPO) algorithm to evaluate the effectiveness of another state-of-the-art DRL method in a distributed setting against DDPG and D4PG.</p>
+<p align=justify><b><a href=https://github.com/inigo-irigaray/Parallel-Training-Robotic-Arms-DDPG-D4PG-APPO/blob/master/README.md#4-mp-d3pg>4. MP-D3PG.</a></b> </p>
 
-<p align=justify><b><a href=https://github.com/inigo-irigaray/Parallel-Training-Robotic-Arms-DDPG-D4PG-APPO/blob/master/README.md#5-a-comparative-analysis-of-the-models>5. Comparative Analysis.</a></b> Compares the strengths and performance of the three algorithms training robotic arms.</p>
+<p align=justify><b><a href=https://github.com/inigo-irigaray/Parallel-Training-Robotic-Arms-DDPG-D4PG-APPO/blob/master/README.md#5-d4pg>5. D4PG.</a></b> Analyzes the limitations on DDPG and the improvements introduced to reach the Distributed Distributional Deep Deterministic Policy Gradients (D4PG) algorithm, as well as its performance on this environment.</p>
 
-<p align=justify><b><a href=https://github.com/inigo-irigaray/Parallel-Training-Robotic-Arms-DDPG-D4PG-APPO/blob/master/README.md#6-future-work>6. Future Work.</a></b> Explores potential avenues of interest for future experiments.</p>
+<p align=justify><b><a href=https://github.com/inigo-irigaray/Parallel-Training-Robotic-Arms-DDPG-D4PG-APPO/blob/master/README.md#6-ppo>6. PPO.</a></b> </p>
+
+<p align=justify><b><a href=https://github.com/inigo-irigaray/Parallel-Training-Robotic-Arms-DDPG-D4PG-APPO/blob/master/README.md#7-asynchronous-ppo>7. A-PPO.</a></b> Implements an asynchronous version of the Proximal Policy Optimization (A-PPO) algorithm to evaluate the effectiveness of another state-of-the-art DRL method in a distributed setting against DDPG and D4PG.</p>
+
+<p align=justify><b><a href=https://github.com/inigo-irigaray/Parallel-Training-Robotic-Arms-DDPG-D4PG-APPO/blob/master/README.md#8-a-comparative-analysis-of-the-models>8. Comparative Analysis.</a></b> Compares the strengths and performance of the three algorithms training robotic arms.</p>
+
+<p align=justify><b><a href=https://github.com/inigo-irigaray/Parallel-Training-Robotic-Arms-DDPG-D4PG-APPO/blob/master/README.md#9-future-work>9. Future Work.</a></b> Explores potential avenues of interest for future experiments.</p>
 
 ---------
 ## 1. Preliminaries
@@ -140,11 +146,11 @@ or
 
 · TO DO: Ray implementation --> empiric results compared to PPO (NOTE: not always positive on performance in other environments)
 
-## 5. A Comparative Analysis of the Models
+## 8. A Comparative Analysis of the Models
 
 · 
 
-## 6. Future Work
+## 9. Future Work
 
 · SAC
 
