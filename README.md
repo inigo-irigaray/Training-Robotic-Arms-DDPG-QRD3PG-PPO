@@ -74,10 +74,10 @@ or
     
 <p align=justify> which will start training the model from scratch until it reaches the environment's goal.</p>
 
-· Present an overview of DRL policy gradients
-
 ## 2. DDPG
 
+<p align=justify>Deep Deterministic Policy Gradients (<b>DDPG</p>) is a policy gradients, model-free DRL method for continuous action spaces that learns off-policy to parameterize the deterministic target policy from an exploratory behaviour policy interacting with the environment. direction of gradients, critic bootstrapping etc.</p>
+ 
 · Description of Deep Deterministic Policy Gradients based on research paper + specific implementation of the code
 
 #### Policy Gradients: Actor-Critic
