@@ -83,48 +83,58 @@ or
  · Conventional: Ornstein-Uhlenbeck Noise adds stochasticity and randomness to deterministic model for exploration
  
  · Random Noise: Adds simplicity and readability to the code, after empirical tests NO DETERIORATION of training --- Preferred choice
+ 
+#### Normalization Layers
 
-## 3. D4PG
-
-· Overview of weaknesses of DDPG implementation in the previous section and room for improvements tested and discussed in following points that lead to this project's D4PG implementation
-
+· NoNorm, BatchNorm, LayerNorm
+ 
 #### PrioBuffer
 
-· Minor relevant impact on a standalone basis, blends well with other improvements down the line to significantly impact the algorithms' performance
+· Does not blend well with the algorithm, adds significant computational burden and time cost for not radical improvement in performace episode-wise. Change discarded.
 
-#### NoNorm vs BatchNorm vs LayerNorm
+## 3. QR-D3PG
 
-· BatchNorm not blending well with priobuffer
+#### Distributional Approaches to Reinforcement Learning
 
-· LayerNorm on 1st layer of Actor & Critic -- remarkable positive impact wrt NoNorm. on more layers leads to overkill, strong deterioration of training
+. Why use them?
 
-#### Multi-Training Every X t-steps
+#### Quantile Regression Distributional Deep Deterministic Policy Gradients (QR-D3PG)
 
-· Strong robust episode scores early-on BUT at the expense of time (running 10 training steps every 20 timesteps was prohibitively time-consuming, 4 training steps was better, but still takes a lot longer than 1 training step every timestep ----> hints at benefits of parallelization of learning==MORE learning + LESS time)
+. Massive improvement.
 
-#### Distributional
+#### Normalization Layers
 
-· Implementation of C51 effects in progress
+· NoNorm, BatchNorm, LayerNorm
 
-· TO DO: try quantile regression distribution.
+## 4. MP-D3PG
 
-· TO DO: Research Implicit Quantile Networks.
+## Distributed Systems and Multiprocessing
 
-#### N-step
+· Overview of multiprocessing.
 
-· Implement step unrolling with reward discounting --> has shown positive effects for other envs
+## MultiProcessing Distributed Deep Deterministic Policy Gradients (MP-D3PG)
 
-#### Ray Parallelization
+· Implementation and impact.
 
-· TO DO implement ray rllib parallelization with remote actors tasks and learners and test empirically how well it blends with this particular environment
+## 5. D4PG
 
-## 4. Asynchronous PPO
+## Combining everything into one single algorithm
 
-· Description of Proximal Policy Optimization and specifics of this implementation
+· Results
+
+## 6. PPO
+
+#### Policy, old policy, critic
+
+· 
 
 #### Generalized Advantage Estimation
 
 · Implementation in this PPO version and effects
+
+## 7. Asynchronous PPO
+
+· Description of Proximal Policy Optimization and specifics of this implementation
 
 #### Asynchronous PPO
 
@@ -132,7 +142,11 @@ or
 
 ## 5. A Comparative Analysis of the Models
 
+· 
+
 ## 6. Future Work
+
+· SAC
 
 ## References
 
