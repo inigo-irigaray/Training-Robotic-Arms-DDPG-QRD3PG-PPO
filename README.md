@@ -108,11 +108,11 @@ or
 
 ## 4. MP-D3PG
 
-## Distributed Systems and Multiprocessing
+#### Distributed Systems and Multiprocessing
 
 · Overview of multiprocessing.
 
-## MultiProcessing Distributed Deep Deterministic Policy Gradients (MP-D3PG)
+#### MultiProcessing Distributed Deep Deterministic Policy Gradients (MP-D3PG)
 
 · Implementation and impact.
 
