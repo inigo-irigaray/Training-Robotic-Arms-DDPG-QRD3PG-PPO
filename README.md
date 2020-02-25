@@ -57,6 +57,17 @@
     tensorboardX==1.4
     unityagents
 
+## Running the models
+
+<p align=justify> To run the different models available in this repository one only needs to copy/download from this repository the appropiate files from the folder of the model he/she wants to run and write in the command line: </p>
+
+    $ python main.py
+or
+
+    $ python3 main.py
+    
+<p align=justify> which will start training the model from scratch until it reaches the environment's goal.</p>
+
 · Present an overview of DRL policy gradients
 
 ## 2. DDPG
