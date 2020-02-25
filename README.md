@@ -59,7 +59,7 @@
 
 ## Running the models
 
-<p align=justify> To run the different models available in this repository one only needs to copy/download from this repository the appropiate files from the folder of the model he/she wants to run and write in the command line: </p>
+<p align=justify> To run the different models available in this repository one only needs to clone/download from this repository the appropiate files from the folder of the model he/she wants to run and write in the command line: </p>
 
     $ python main.py
 or
