@@ -124,7 +124,7 @@ or
 
 ## 5. D4PG
 
-## Combining everything into one single algorithm
+#### Combining everything into one single algorithm
 
 · Results
 
