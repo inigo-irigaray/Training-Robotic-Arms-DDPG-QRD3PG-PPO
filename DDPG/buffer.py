@@ -148,8 +148,9 @@ class PrioritizedReplayBuffer(ReplayBuffer):
             self._max_priority = max(self._max_priority, priority)
     
     
+
     
-"""The following code has been imported from OpenAI's baselines."""    
+"""Code imported from OpenAI's baselines @ https://github.com/openai/baselines/blob/master/baselines/common/segment_tree.py."""    
 class SegmentTree(object):
     def __init__(self, capacity, operation, neutral_element):
         """Build a Segment Tree data structure.
