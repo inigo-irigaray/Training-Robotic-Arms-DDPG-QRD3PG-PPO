@@ -1,6 +1,6 @@
-# Comparative Distributed Robotic Arms Training Using DDPG, D4PG & A-PPO with 20 Agents (In Progress):
+# A Comparative Study of Distributed Methods Training Robotic Arms Using DDPG, D4PG, PPO & A-PPO with Multiple Agents (In Progress):
 
-<p align=justify><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(INITIAL DRAFT VERSION BOUND FOR UPDATES WITH FINAL RESULTS AS THE PROJECT ADVANCES) The aim of this project is to demonstrate the robustness of state-of-the-art deep reinforcement learning models (DRL) training robotic systems, e.g. robotic arms, as well as other challenges with continuous action spaces. Additionally, it experiments with deep distributed versions of DRL architectures, to test empirically the effects of parallelized learning and the advantages it can bring for industrial implementations of Deep Learning in the private sector as the field becomes increasingly essential to companies. It, specifically, implements Distributed Distributional Deep Deterministic Policy Gradients (D4PG) and an asynchronous version of Proximal Policy Optimization (A-PPO). At this point in the experiment, the DDPG algorithm has successfully completed training for robotic arms in the Unity Reacher environment, and the D4PG and A-PPO implementations are in progress and waiting for the results to update this abstract.</b></p>
+<p align=justify><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(INITIAL DRAFT VERSION BOUND FOR UPDATES WITH FINAL RESULTS AS THE PROJECT ADVANCES) The aim of this project is to demonstrate the robustness of state-of-the-art deep reinforcement learning models (DRL) training robotic systems, e.g. robotic arms, as well as other challenges with continuous action spaces. Additionally, it experiments with deep distributed versions of DRL architectures, to test empirically the effects of parallelized learning and the advantages it can bring for industrial implementations of Deep Learning in the private sector as the field becomes increasingly essential to companies. It, specifically, implements Distributed Distributional Deep Deterministic Policy Gradients (D4PG) and an asynchronous version of Proximal Policy Optimization (A-PPO). At this point in the experiment, variants of the DDPG and D3PG algorithms have been successfully completed training for robotic arms in the Unity Reacher environment, an ablation study of the impact of different components of the algorithm is underway, and the D4PG and A-PPO implementations are in progress and waiting for the results to update this abstract.</b></p>
 
 -------
 <p align=justify><b><a href=https://github.com/inigo-irigaray/Parallel-Training-Robotic-Arms-DDPG-D4PG-APPO/blob/master/README.md#1-preliminaries>1. Preliminaries.</a></b> Introduces a conceptual background on Deep Reinforcement Learning and the Reacher Unity Environment.</p>
@@ -24,6 +24,10 @@
 ---------
 ## 1. Preliminaries
 
+<p align=justify>This project is the second among three of Udacity's Deep Reinforcement Learning Nanodegree and aims to show the power of DRL methods to solve robotics and other continuous control problems. In particular, I have implemented different versions of Deterministic Policy Gradients to run an ablation study of the improvements that lead to Distributed Distributional Deep Deterministic Policy Gradients, as well as a Proximal Policy Optimization method to build upon it and implement an asynchronous variant of the baseline model. This project relies on a strong foundation based on Udacity's nanodegree, a thorough research into the DRL research literature, online lectures from top universities on the topic and the textbook Deep Reinforcement Learning Hands-On.</p>
+
+<p align=justify><b>NOTE:</b> This initial deliverable is designed to meet Udacity's rubrik criteria to pass the project while I work on the final implementation of Multiprocessing for D3PG and on improvements for PPO (mostly parameter tweaking), and prepare the presentation of this project and README.md in research paper format for my personal portfolio.</p>
+
 ### Environment
 
 <p align=justify>In this environment, a double-jointed arm can move to target locations. A reward of +0.1 is provided for each step that the agent's hand is in the goal location. Thus, the goal of your agent is to maintain its position at the target location for as many time steps as possible.</p>
@@ -45,7 +49,10 @@
  · <a href=https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Linux_NoVis.zip>AWS(headless)</a>
  
  ### Requirements
-
+ 
+ Nanodegree's prerequisites: <a href=https://github.com/udacity/deep-reinforcement-learning/#dependencies>link.</a>
+ 
+    python==3.6
     tensorflow==1.7.1
     Pillow>=4.2.1
     matplotlib
@@ -63,7 +70,7 @@
     tensorboardX==1.4
     unityagents
 
-## Running the models
+### Running the models
 
 <p align=justify> To run the different models available in this repository one only needs to clone/download from this repository the appropiate files from the folder of the model he/she wants to run and write in the command line: </p>
 
@@ -73,6 +80,13 @@ or
     $ python3 main.py
     
 <p align=justify> which will start training the model from scratch until it reaches the environment's goal.</p>
+
+<p align=justify>For example:
+<p align=justify>1. Clone this repository.</p>
+<p align=justify>2. Install all required dependencies.</p>
+<p align=justify>3. And run the the command:</p>
+     
+    $ python3 path_to_DDPG_folder/main.py --cuda=True
 
 ## 2. DDPG
 
