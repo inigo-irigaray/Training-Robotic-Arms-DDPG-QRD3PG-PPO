@@ -12,7 +12,7 @@ from pathlib import Path
 from unityagents import UnityEnvironment
 
 import buffer
-import D3PG
+import d3pg
 
 
 
@@ -48,7 +48,7 @@ def run(config):
     env_info = env.reset(train_mode=True)[brain_name]
     num_agents = len(env_info.agents)
     
-    ddpg = D3PG.DDPGAgent.init_from_env(env_info, brain, quant=config.quant, hid1=config.hid1, hid2=config.hid2, 
+    ddpg = d3pg.DDPGAgent.init_from_env(env_info, brain, quant=config.quant, hid1=config.hid1, hid2=config.hid2, 
                                         norm=config.norm, lr=config.lr, epsilon=config.epsilon, gamma=config.gamma, tau=config.tau)
     print(ddpg.actor)
     print(ddpg.critic)
