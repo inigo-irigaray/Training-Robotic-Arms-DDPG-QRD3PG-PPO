@@ -102,6 +102,10 @@ def run(config):
             env.close()
             break
             
+    ddpg.save(run_dir / 'ddpgprio_robotic_arm.pt')
+    env.close()
+    writer.export_scalars_to_json(str(logs_dir / 'summary.json'))
+    writer.close()
             
             
             
