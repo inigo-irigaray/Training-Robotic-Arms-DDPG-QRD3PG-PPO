@@ -201,9 +201,9 @@ IMPALA: Scalable.....
 ## Appendix A
 
 
-## Hyperparameters
+### Hyperparameters
 
-### DDPG (best performance with layer normalization)
+#### DDPG (best performance with layer normalization)
 
     --env = '/data/Reacher_Linux_NoVis/Reacher.x86_64'
     --cuda = True
@@ -218,7 +218,7 @@ IMPALA: Scalable.....
     --capacity = 100000
     --batch_size = 128
    
-### QR-D3PG (best performance with layer normalization)
+#### QR-D3PG (best performance with layer normalization)
 
     --env = '/data/Reacher_Linux_NoVis/Reacher.x86_64'
     --cuda = True
