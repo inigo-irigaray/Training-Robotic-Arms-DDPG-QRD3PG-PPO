@@ -109,7 +109,7 @@ class DDPGAgent:
         self.iter += 1
         obs, action, reward, next_obs, done = sample
         
-        # train critic ---- DIFFERENT ARCHITECTURE IN PREV MODEL
+        # train critic
         self.critic_optim.zero_grad()
         next_action = self.tgt_actor.tgt_model(next_obs)
         #vf_in = torch.cat([next_obs, next_action], dim=1)
