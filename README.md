@@ -197,3 +197,39 @@ PrioBuff
 AcceleratedMethods4RL -- Ray implem
 
 IMPALA: Scalable.....
+
+## Appendix A
+
+
+## Hyperparameters
+
+### DDPG (best performance with layer normalization)
+
+    --env = '/data/Reacher_Linux_NoVis/Reacher.x86_64'
+    --cuda = True
+    --seed = 1
+    --hid1 = 400
+    --hid2 = 300
+    --norm = 'layer'
+    --lr = 1e-4
+    --epsilon = 0.3
+    --gamma = 0.99
+    --tau = 1e-3
+    --capacity = 100000
+    --batch_size = 128
+   
+### QR-D3PG (best performance with layer normalization)
+
+    --env = '/data/Reacher_Linux_NoVis/Reacher.x86_64'
+    --cuda = True
+    --seed = 1
+    --quant = 5
+    --hid1 = 400
+    --hid2 = 300
+    --norm = 'layer'
+    --lr = 1e-4
+    --epsilon = 0.3
+    --gamma = 0.99
+    --tau = 1e-3
+    --capacity = 100000
+    --batch_size = 128
