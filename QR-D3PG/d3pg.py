@@ -112,10 +112,9 @@ class DDPGAgent:
         self.iter += 1
         obs, action, reward, next_obs, done = sample
         
-        # train critic ---- DIFFERENT ARCHITECTURE IN PREV MODEL
+        # train critic
         self.critic_optim.zero_grad()
         next_action = self.tgt_actor.tgt_model(next_obs)
-        #vf_in = torch.cat([next_obs, next_action], dim=1)
         next_dist = self.tgt_critic.tgt_model(next_obs, next_action)
         next_dist[done.repeat(1, 5)] = 0.0
         next_val_dist = reward + self.gamma * next_dist
@@ -130,13 +129,11 @@ class DDPGAgent:
         # train actor
         self.actor_optim.zero_grad()
         actions = self.actor(obs)
-        actor_loss = -self.critic(obs, actions).mean(dim=1) #torch.cat([obs, actions], dim=1)
-        #sample_prios = torch.abs(actor_loss) + 1e-5
+        actor_loss = -self.critic(obs, actions).mean(dim=1)
         actor_loss = actor_loss.mean()
         actor_loss.backward()
         self.actor_optim.step()
         
-        #buffer.update_prios(....)
         if writer:
             writer.add_scalar('critic_loss', critic_loss, self.iter)
             writer.add_scalar('actor_loss', actor_loss, self.iter)
