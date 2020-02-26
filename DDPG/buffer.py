@@ -51,7 +51,7 @@ class ReplayBuffer:
         if to_gpu:
             device = 'cuda'
         # normalizes rewards automatically
-        if norm_r: # TERRIBLE IDEA! SLOWS DOWN LEARNING DRAMATICALLY W/O SIGNIFICANT REWARD BOOST
+        if norm_r: # Note: It has empirically slowed down learning dramatically in my experiments for Reacher environment!
             rewards = torch.from_numpy(np.vstack([
                 (self.rmemory[idx] - np.mean(self.rmemory[:self.filled])) /
                 np.std(self.rmemory[:self.filled]) for idx in idxs])).float().to(device)
@@ -91,7 +91,7 @@ class PrioritizedReplayBuffer(ReplayBuffer):
         self._max_priority = 1.0
     
     def add(self, *args, **kwargs):
-        idx = self.current % self.capacity ### maybe move this one after the super() is called?
+        idx = self.current % self.capacity
         super().add(*args, **kwargs)
         self._it_sum[idx] = self._max_priority ** self._alpha
         self._it_min[idx] = self._max_priority ** self._alpha
@@ -149,7 +149,7 @@ class PrioritizedReplayBuffer(ReplayBuffer):
     
     
     
-    
+"""The following code has been imported from OpenAI's baselines."""    
 class SegmentTree(object):
     def __init__(self, capacity, operation, neutral_element):
         """Build a Segment Tree data structure.
