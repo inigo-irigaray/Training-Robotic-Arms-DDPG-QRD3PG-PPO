@@ -42,7 +42,7 @@ def run(config):
         cuda = True
     else:
         cuda = False
-    env = UnityEnvironment(file_name='/data/Reacher_Linux_NoVis/Reacher.x86_64')
+    env = UnityEnvironment(file_name=config.env)
     brain_name = env.brain_names[0]
     brain = env.brains[brain_name]
     env_info = env.reset(train_mode=True)[brain_name]
@@ -100,11 +100,16 @@ def run(config):
             env.close()
             break
             
-            
+    ddpg.save(run_dir / 'd3pg_robotic_arm.pt')
+    env.close()
+    writer.export_scalars_to_json(str(logs_dir / 'summary.json'))
+    writer.close()            
             
             
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument('--env', default='/data/Reacher_Linux_NoVis/Reacher.x86_64',
+                        required=True, help='Path to environment file.', type=str)
     parser.add_argument('--cuda', default=False, type=bool)
     parser.add_argument('--seed', default=1, type=int)
     parser.add_argument('--quant', default=5, type=int)
