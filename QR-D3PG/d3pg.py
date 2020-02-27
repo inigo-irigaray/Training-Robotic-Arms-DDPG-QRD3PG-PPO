@@ -118,7 +118,7 @@ class DDPGAgent:
         next_dist = self.tgt_critic.tgt_model(next_obs, next_action)
         next_dist[done.repeat(1, 5)] = 0.0
         next_val_dist = reward + self.gamma * next_dist
-        val_dist = self.critic(obs, action) #torch.cat([obs, action], dim=1)
+        val_dist = self.critic(obs, action)
         distance = next_val_dist.detach() - val_dist
         huber_loss = torch.where(distance.abs() < 1.0, 0.5 * distance.pow(2), 1.0 * (distance.abs() - 0.5 * 1.0))
         critic_loss = huber_loss * (self.critic.t - (distance.detach() < 0).float()).abs()
