@@ -83,7 +83,8 @@ class TargetModel:
         
         
 class DDPGAgent:
-    def __init__(self, obs_size, act_size, quant, hid1=400, hid2=300, norm='layer', lr=0.01, epsilon=0.3, gamma=0.99, tau=0.01):
+    def __init__(self, obs_size, act_size, quant, hid1=400, hid2=300, norm='layer',
+                 lr=0.01, epsilon=0.3, gamma=0.99, tau=0.01):
         self.actor = Actor(obs_size, act_size, hid1=hid1, hid2=hid2, norm=norm)
         self.tgt_actor = TargetModel(self.actor)
         self.critic = Critic(obs_size, act_size, quant, hid1=hid1, hid2=hid2, norm=norm)
@@ -192,7 +193,8 @@ class DDPGAgent:
         torch.save(save_dict, filename)
      
     @classmethod
-    def init_from_env(cls, env_info, brain, quant, hid1=400, hid2=300, norm='layer', lr=1e-4, epsilon=0.3, gamma=0.99, tau=1e-3):
+    def init_from_env(cls, env_info, brain, quant, hid1=400, hid2=300, norm='layer',
+                      lr=1e-4, epsilon=0.3, gamma=0.99, tau=1e-3):
         obspace = env_info.vector_observations.shape[1]
         aspace = brain.vector_action_space_size
         obs_size = obspace
