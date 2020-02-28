@@ -163,17 +163,17 @@
 
 #### MultiProcessing Distributed Deep Deterministic Policy Gradients (MP-D3PG)
 
-· APE-X
+· Implementing a distributed replay buffer (APE-X)
 
 ### 5.2 D4PG
 
 #### Combining everything into one single algorithm
 
-· Results
+· Combining QR-D3PG with MP-D3PG to implement the Distributed Distributional Deep Deterministic Policy Gradients.
 
 ### 5.3 Asynchronous PPO
 
-· Description of Proximal Policy Optimization and specifics of this implementation
+· Implementing a distributed version of PPO.
 
 ## References
 
