@@ -56,10 +56,8 @@
 
 ## 1. DDPG
 
-<p align=justify>Deep Deterministic Policy Gradients (<b>DDPG</b>) is a policy gradients, model-free DRL method for continuous action spaces that learns off-policy to parameterize the deterministic target policy from an exploratory behaviour policy interacting with the environment. direction of gradients, critic bootstrapping etc.</p>
+<p align=justify>Deep Deterministic Policy Gradients (<b>DDPG</b>) is a policy gradients, model-free, off-policy DRL method for continuous action spaces. It learns from an exploratory behaviour policy to parameterize the deterministic target policy maximixing state-action values. The online policy interacts with the environment to generate batches of experience that accumulate state, action, reward, next_state and done info transitions in an experience replay buffer. The experiences are then sampled randomly from the buffer to perform mini-batch stochastic gradient ascent of the policy loss, which is equal to the expected Q-value (since our goal is to learn the policy that maximizes it). This Q-value is in turn estimated from a critic network that models the value function, is differentiable and is learned by performing stochastich gradient descent over the mean squared temporal-difference error (MSTDE).</p>
  
-· Description of Deep Deterministic Policy Gradients based on research paper + specific implementation of the code
-
 #### Policy Gradients: Actor-Critic
 
 · Actor-critic target deterministic policy through gradient ascent learns from exploration online algorithm
