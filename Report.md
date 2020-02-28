@@ -106,6 +106,14 @@
 
 #### Normalization Layers
 
+<p align=justify>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The results of implementing quantile regression are astounding. It manages to reduce significantly both training time and episodes for all three implementations: baseline, batch norm and layer norm. Some pretty interesting differences among the three break apart:</p>
+
+<p align=justify>1.&nbsp;&nbsp;&nbsp;While batch norm and layer norm were both tied at a robust 125 episodes to solve the task, batch norm improves to a very respectable 115 episodes. However, <b>layer normalization achieves the incredible state-of-the-art result of 105 episodes to solve a task that requires running a minimum of 100 episodes</b>. Additionally, it is incredibly <b>stable and robuts</b>, achieving a score of 39 by episode 37, and consistenly ranking in the mid-39s / high-38s for the rest of the game, except for some outliers that all fall above 35 (a still very good score).</p>
+
+<p align=justify>2.&nbsp;&nbsp;&nbsp;While batch normalization requires less episodes than the baseline implementation of QR-D3PG without normalization layers (124 vs 115), it takes longer time to compute. This is due to the overhead computational costs associated with the normalization layers. While layer normalization managed to keep the advantage due to its dramatic reduction of the number of episodes, batch normalization could not overcome the speed lag with the baseline.</p>
+
+<p align=justify>3.&nbsp;&nbsp;&nbsp;Quantile Regression Distributional Deep Deterministic Policy Gradients with independent Gaussian noise and randomly sample experience replay buffer proves to be a stable, rock-solid and robust algorithm for continuous control tasks undismissively separating itself from the pack.</p>
+
 <p align=center><img src=https://github.com/inigo-irigaray/Training-Robotic-Arms-DDPG-QRD3PG-PPO/blob/master/imgs/D3PG/reward_step.png height=330 width=650></p>
 
 <p align=center><sub>Episode reward per number of episodes. Baseline (blue), Batch (orange), Layer (red)</sub></p>
