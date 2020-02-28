@@ -133,7 +133,7 @@ T.P. Lillicrap, J.J. Hunt et al., 'Continuous Control with Deep Reinforcement Le
 
 G. Barth-Maron, M.W. Hoffman et al., 'Distributed Distributional Deterministic Policy Gradients', 2018.
 
-M.G. Bellemare, W. Dabney et al., 'ADistributionalPerspective on Reinforcement Learning', 2017.
+M.G. Bellemare, W. Dabney et al., 'A DistributionalPerspective on Reinforcement Learning', 2017.
 
 W. Dabney, M. Rowland, M.G. Bellemare & R. Munos, 'Distributional Reinforcement Learning with Quantile Regression', 2017.
 
