@@ -37,14 +37,14 @@
     --capacity = 100000
     --batch_size = 128
 
-#### PPO (best performance with layer normalization)
+#### PPO (best performance without normalization layers)
 
     --env = '/data/Reacher_Linux_NoVis/Reacher.x86_64'
     --cuda = True
     --seed = 1
     --hid1 = 400
     --hid2 = 300
-    --norm = 'layer'
+    --norm = None
     --lr = 1e-4
     --gamma = 0.99
     --gae_lambda = 0.95
