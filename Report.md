@@ -78,15 +78,15 @@
 
 <p align=center><img src=https://github.com/inigo-irigaray/Training-Robotic-Arms-DDPG-QRD3PG-PPO/blob/master/imgs/DDPG/episode_reward_step.png height=330 width=650></p>
 
-<p align=center><sub>Episode reward per number of episodes. Baseline (red), Batch (blue), Layer (Orange)</sub></p>
+<p align=center><sub>Episode reward per number of episodes. Baseline (red), Batch (blue), Layer (orange)</sub></p>
 
 <p align=center><img src=https://github.com/inigo-irigaray/Training-Robotic-Arms-DDPG-QRD3PG-PPO/blob/master/imgs/DDPG/episode_reward_time.png height=330 width=650></p>
 
-<p align=center><sub>Episode reward per training time. Baseline (red), Batch (blue), Layer (Orange)</sub></p>
+<p align=center><sub>Episode reward per training time. Baseline (red), Batch (blue), Layer (orange)</sub></p>
 
 <p align=center><img src=https://github.com/inigo-irigaray/Training-Robotic-Arms-DDPG-QRD3PG-PPO/blob/master/imgs/DDPG/speed.png height=330 width=650></p>
 
-<p align=center><sub>Speed (frames per second). Baseline (red), Batch (blue), Layer (Orange)</sub></p>
+<p align=center><sub>Speed (frames per second). Baseline (red), Batch (blue), Layer (orange)</sub></p>
 
 #### PrioBuffer
 
@@ -104,7 +104,17 @@
 
 #### Normalization Layers
 
-· NoNorm, BatchNorm, LayerNorm
+<p align=center><img src=https://github.com/inigo-irigaray/Training-Robotic-Arms-DDPG-QRD3PG-PPO/blob/master/imgs/D3PG/reward_step.png height=330 width=650></p>
+
+<p align=center><sub>Episode reward per number of episodes. Baseline (blue), Batch (orange), Layer (red)</sub></p>
+
+<p align=center><img src=https://github.com/inigo-irigaray/Training-Robotic-Arms-DDPG-QRD3PG-PPO/blob/master/imgs/D3PG/reward_time.png height=330 width=650></p>
+
+<p align=center><sub>Episode reward per training time. Baseline (blue), Batch (orange), Layer (red)</sub></p>
+
+<p align=center><img src=https://github.com/inigo-irigaray/Training-Robotic-Arms-DDPG-QRD3PG-PPO/blob/master/imgs/D3PG/speed.png height=330 width=650></p>
+
+<p align=center><sub>Speed (frames per second). Baseline (blue), Batch (orange), Layer (red)</sub></p>
 
 ## 3. PPO
 
@@ -115,6 +125,16 @@
 #### Generalized Advantage Estimation
 
 · Implementation in this PPO version and effects
+
+#### Normalization Layers
+
+<p align=center><img src=https://github.com/inigo-irigaray/Training-Robotic-Arms-DDPG-QRD3PG-PPO/blob/master/imgs/PPO/episode_reward_step.png height=330 width=650></p>
+
+<p align=center><sub>Episode reward per number of episodes. Baseline (blue), Layer (orange)</sub></p>
+
+<p align=center><img src=https://github.com/inigo-irigaray/Training-Robotic-Arms-DDPG-QRD3PG-PPO/blob/master/imgs/PPO/episode_reward_time.png height=330 width=650></p>
+
+<p align=center><sub>Episode reward per training time. Baseline (blue), Layer (orange)</sub></p>
 
 ## 4. Comparative Analysis of Best-Performing Models
 
