@@ -11,7 +11,7 @@ from collections import deque
 from pathlib import Path
 from unityagents import UnityEnvironment
 
-import PPO
+import ppo
 
 
 
@@ -41,19 +41,19 @@ def run(config):
         cuda = True
     else:
         cuda = False
-    env = UnityEnvironment(file_name='/data/Reacher_Linux_NoVis/Reacher.x86_64')
+    env = UnityEnvironment(file_name=config.env)
     brain_name = env.brain_names[0]
     brain = env.brains[brain_name]
     env_info = env.reset(train_mode=True)[brain_name]
     num_agents = len(env_info.agents)
     
-    ppo = PPO.PPOAgent.init_from_env(env_info, brain, hid1=config.hid1, hid2=config.hid2,
+    ppo = ppo.PPOAgent.init_from_env(env_info, brain, hid1=config.hid1, hid2=config.hid2,
                                      norm=config.norm, lr=config.lr, gamma=config.gamma,
                                      gae_lambda=config.gae_lambda, epochs=config.epochs, eps=config.eps)
     print(ppo.actor)
     print(ppo.critic)
     
-    trajectory = PPO.Trajectory()
+    trajectory = ppo.Trajectory()
     
     timestep = 0
     episode = 0
@@ -112,6 +112,8 @@ def run(config):
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+    parser.add_argument('--env', default='/data/Reacher_Linux_NoVis/Reacher.x86_64',
+                        required=True, help='Path to environment file.', type=str)
     parser.add_argument('--cuda', default=False, type=bool)
     parser.add_argument('--seed', default=1, type=int)
     parser.add_argument('--hid1', default=400, type=int)
