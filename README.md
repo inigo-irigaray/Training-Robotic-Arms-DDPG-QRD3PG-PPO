@@ -3,6 +3,8 @@
 ### Preliminaries
 
 <p align=justify>(Accompanying full report <a href=https://github.com/inigo-irigaray/Training-Robotic-Arms-DDPG-QRD3PG-PPO/blob/master/Report.md><b>here.</b></a>)
+ 
+<p align=justify>(Accompanying Udacity report <a href=https://github.com/inigo-irigaray/Training-Robotic-Arms-DDPG-QRD3PG-PPO/blob/master/ReportUdacity.md><b>here.</b></a>)
 
 <p align=justify>This project is the second among three of Udacity's Deep Reinforcement Learning Nanodegree and aims to show the power of DRL methods to solve robotics and other continuous control problems. In particular, I have implemented different versions of Deterministic Policy Gradients to run an ablation study of the improvements that lead to Distributed Distributional Deep Deterministic Policy Gradients, as well as a Proximal Policy Optimization method to build upon it and implement an asynchronous variant of the baseline model. This project relies on a strong foundation based on Udacity's nanodegree, a thorough research into the DRL research literature, online lectures from top universities on the topic and the textbook Deep Reinforcement Learning Hands-On.</p>
 
