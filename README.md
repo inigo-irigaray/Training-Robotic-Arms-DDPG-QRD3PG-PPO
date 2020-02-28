@@ -2,7 +2,7 @@
 
 <p align=justify>This project is the second among three of Udacity's Deep Reinforcement Learning Nanodegree and aims to show the power of DRL methods to solve robotics and other continuous control problems. In particular, I have implemented different versions of Deterministic Policy Gradients to run an ablation study of the improvements that lead to Distributed Distributional Deep Deterministic Policy Gradients, as well as a Proximal Policy Optimization method to build upon it and implement an asynchronous variant of the baseline model. This project relies on a strong foundation based on Udacity's nanodegree, a thorough research into the DRL research literature, online lectures from top universities on the topic and the textbook Deep Reinforcement Learning Hands-On.</p>
 
-<p align=justify><b>NOTE:</b> This initial deliverable is designed to meet Udacity's rubric criteria to pass the project while I work on the final implementation of Multiprocessing for D3PG and on improvements for PPO (mostly parameter tweaking), and prepare the presentation of a more detailed report this project and README.md in blog format for my personal portfolio.</p>
+<p align=justify><b>NOTE:</b> This initial deliverable is designed to meet Udacity's rubric criteria to pass the project while I work on the final implementation of Multiprocessing for D3PG and on improvements for PPO (mostly parameter tweaking), and prepare the presentation of a more detailed report this project and README.md in blog format for my personal portfolio. Therefore, MP-D3PG, D4PG and A-PPO are currently empty folders. All the others contain the necessary files for this implemntation, tensorboard data and some of the successful saved models after training.</p>
 
 ### Environment
 
