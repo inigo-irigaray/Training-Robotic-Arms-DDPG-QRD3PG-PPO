@@ -52,6 +52,7 @@
     --update_timestep = 375
     
 ---------
+<p align=justify><sub>NOTE: all implementations include utility functions prep_training and prep_rollouts to switch between GPUs and CPUs when necessary, and save, init_from_env, init_from_save to save trained model parameters and initialize the environment from scratch or from a file of saved trained weights.</sub></p>
 
 ## 1. DDPG
 
