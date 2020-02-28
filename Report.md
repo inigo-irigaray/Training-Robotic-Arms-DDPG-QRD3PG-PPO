@@ -70,8 +70,24 @@
  
 #### Normalization Layers
 
-· NoNorm, BatchNorm, LayerNorm
- 
+<p align=justify>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I then progressed to study the effects of normalization of inputs within the Actor and Critic networks in overall performance. <b>Batch and Layer normalization</b> have been widely incorporated into deep learning algorithms to allow for aggresive learning rates and faster training by standardizing the interlayer input and reducing internal covariate shift. Additionally, they can act as regularizers to improve generalization.</p>
+
+<p align=justify>&nbsp;&nbsp;&nbsp;&nbsp;However, after testing both types of normalization within the network architectures, they proved to damage learning when implemented in-between layers. However, they did manage to accelerate training when they were only introduced as the first layer of the network, even before the initial linear layer. Normalization, therefore, appears to ease training due to its regularizing effect and not by means of internal covariate shift reduction. However, this only partially true. While they both <b>reduced the number of episodes</b> to achieve the goal of a reward of over 30.0 for the past 100 episodes, from 127 in the baseline implementation to 125 for both batch and layer normalization, they <b>took longer to train</b> due to increased computations.</p>
+
+<p align=justify>&nbsp;&nbsp;&nbsp;This suggests that adding these extra layers to the architecture design depends very much on the specifics of the application. The user will have to trade off the episodic cost of interacting with the environment (which can be very high for some physical robotics applications, like crashing self-driving cars) for computational and time cost (which may be more important for some applications that do not require physical hardware, for example). It is, therefore, left for the user as a hyperparameter choice (--norm = [None, batch, layer]).</p>
+
+<p align=center><img src=https://github.com/inigo-irigaray/Training-Robotic-Arms-DDPG-QRD3PG-PPO/blob/master/imgs/DDPG/episode_reward_step.png height=330 width=650></p>
+
+<p align=center><sub>Episode reward per number of episodes. Baseline (red), Batch (blue), Layer (Orange)</sub></p>
+
+<p align=center><img src=https://github.com/inigo-irigaray/Training-Robotic-Arms-DDPG-QRD3PG-PPO/blob/master/imgs/DDPG/episode_reward_time.png height=330 width=650></p>
+
+<p align=center><sub>Episode reward per training time. Baseline (red), Batch (blue), Layer (Orange)</sub></p>
+
+<p align=center><img src=https://github.com/inigo-irigaray/Training-Robotic-Arms-DDPG-QRD3PG-PPO/blob/master/imgs/DDPG/speed.png height=330 width=650></p>
+
+<p align=center><sub>Speed (frames per second). Baseline (red), Batch (blue), Layer (Orange)</sub></p>
+
 #### PrioBuffer
 
 · Does not blend well with the algorithm, adds significant computational burden and time cost for not radical improvement in performace episode-wise. Change discarded.
