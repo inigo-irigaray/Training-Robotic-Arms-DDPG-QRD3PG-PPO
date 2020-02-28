@@ -126,30 +126,30 @@
 
 ## References
 
-D. Silver, G. Lever et al., 'Deterministic Policy Gradient Algorithms', 2014.
-
-T.P. Lillicrap, J.J. Hunt et al., 'Continuous Control with Deep Reinforcement Learning', 2015.
+J.L. Ba, J.R. Kiros & G.E. Hinton, 'Layer Normalization', 2016.
 
 G. Barth-Maron, M.W. Hoffman et al., 'Distributed Distributional Deterministic Policy Gradients', 2018.
 
 M.G. Bellemare, W. Dabney et al., 'A DistributionalPerspective on Reinforcement Learning', 2017.
 
-W. Dabney, M. Rowland, M.G. Bellemare & R. Munos, 'Distributional Reinforcement Learning with Quantile Regression', 2017.
-
 W. Dabney, G. Ostrovski et al., 'Implicit Quantile Regression Networks for Distributional Reinforcement Learning', 2018.
 
-J. Schulman, F. Wolski, P. Dhariwal, A. Radford & O. Klimov, 'Proximal Policy Optimization Algorithms', 2017.
+W. Dabney, M. Rowland, M.G. Bellemare & R. Munos, 'Distributional Reinforcement Learning with Quantile Regression', 2017.
 
-J. Schulman, P. Moritz, S. Levine, M.I. Jordan & P. Abbeel, 'High-Dimensional Continuous Control Using Generalized Advantage Estimation', 2015.
-
-S. Ioffe & C. Szegedy, 'Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift', 2015.
-
-J.L. Ba, J.R. Kiros & G.E. Hinton, 'Layer Normalization', 2016.
-
-T. Schaul, J. Quan, I. Antonoglou & D. Silver, 'Prioritized Experience Replay', 2016.
+L. Espeholt, H. Soyer, R. Munos et al., 'IMPALA: Scalable Distributed Deep-RL with Importance Weighted Actor-Learner Architectures', 2018.
 
 D. Horgan, J. Quan, D. Budden, G. Barth-Maron, M. Hessel, H. van Hasselt & D. Silver, 'Distributed Prioritized Experience Replay', 2018.
 
-A. Stooke & P. Abbeel, 'Accelerated Methods for Deep Reinforcement Learning', 2018.
+S. Ioffe & C. Szegedy, 'Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift', 2015.
 
-L. Espeholt, H. Soyer, R. Munos et al., 'IMPALA: Scalable Distributed Deep-RL with Importance Weighted Actor-Learner Architectures', 2018.
+T.P. Lillicrap, J.J. Hunt et al., 'Continuous Control with Deep Reinforcement Learning', 2015.
+
+T. Schaul, J. Quan, I. Antonoglou & D. Silver, 'Prioritized Experience Replay', 2016.
+
+J. Schulman, P. Moritz, S. Levine, M.I. Jordan & P. Abbeel, 'High-Dimensional Continuous Control Using Generalized Advantage Estimation', 2015.
+
+J. Schulman, F. Wolski, P. Dhariwal, A. Radford & O. Klimov, 'Proximal Policy Optimization Algorithms', 2017.
+
+D. Silver, G. Lever et al., 'Deterministic Policy Gradient Algorithms', 2014.
+
+A. Stooke & P. Abbeel, 'Accelerated Methods for Deep Reinforcement Learning', 2018.
