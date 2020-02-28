@@ -66,4 +66,4 @@ or
 <p align=justify>2. Install all required dependencies.</p>
 <p align=justify>3. And run the the command:</p>
      
-    $ python3 path_to_DDPG_folder/main.py --cuda=True
+    $ python3 path_to_DDPG_folder/main.py --env='path_to_env' --cuda=True
