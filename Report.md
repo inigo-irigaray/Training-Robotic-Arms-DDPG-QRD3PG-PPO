@@ -1,4 +1,4 @@
-# An Ablation Study of Multiple Policy Gradients Algortihms for Continuous Control with Multiple Agents
+# An Ablation Study of Multiple Policy Gradients Algorithms for Continuous Control with Multiple Agents
 
 <p align=justify><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The aim of this project is to demonstrate the robustness of state-of-the-art deep reinforcement learning models (DRL) for continuous control and training robotic systems, e.g. robotic arms, as its potential benefits for industrial and professional applications become increasingly noticeable. It demonstrates the strength of quantile regression distributional approaches to reinforcement learning, completing the task by episode 105 (just above the minimum required runs by the task of 100 episodes) and potentially achieving a new state-of-the-art result for the Udacity project (needs to be confirmed). Additionally, it performs an ablation study of multiple variations of Deterministic Policy Gradients and Proximal Policy Optimization, which highlight the importance of normalization layers and the representational advantage of approximating value distributions through distributional RL, instead of estimating the mean value function. The next goal is to implement distributed versions of the aforementioned algorithms (MP-D3PG, D4PG & A-PPO) that could potentially yield significant advantages for practical industry applications.</b></p>
 
@@ -125,8 +125,6 @@
 
 ## References
 
-PAPERS:
-
 D. Silver, G. Lever et al., 'Deterministic Policy Gradient Algorithms', 2014.
 
 T.P. Lillicrap, J.J. Hunt et al., 'Continuous Control with Deep Reinforcement Learning', 2015.
@@ -139,9 +137,9 @@ W. Dabney, M. Rowland, M.G. Bellemare & R. Munos, 'Distributional Reinforcement 
 
 W. Dabney, G. Ostrovski et al., 'Implicit Quantile Regression Networks for Distributional Reinforcement Learning', 2018.
 
-PPO
+J. Schulman, F. Wolski, P. Dhariwal, A. Radford & O. Klimov, 'Proximal Policy Optimization Algorithms', 2017.
 
-GAE
+J. Schulman, P. Moritz, S. Levine, M.I. Jordan & P. Abbeel, 'High-Dimensional Continuous Control Using Generalized Advantage Estimation', 2015.
 
 S. Ioffe & C. Szegedy, 'Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift', 2015.
 
@@ -149,6 +147,8 @@ J.L. Ba, J.R. Kiros & G.E. Hinton, 'Layer Normalization', 2016.
 
 T. Schaul, J. Quan, I. Antonoglou & D. Silver, 'Prioritized Experience Replay', 2016.
 
-AcceleratedMethods4RL -- Ray implem
+D. Horgan, J. Quan, D. Budden, G. Barth-Maron, M. Hessel, H. van Hasselt & D. Silver, 'Distributed Prioritized Experience Replay', 2018.
 
-IMPALA: Scalable.....
+A. Stooke & P. Abbeel, 'Accelerated Methods for Deep Reinforcement Learning', 2018.
+
+L. Espeholt, H. Soyer, R. Munos et al., 'IMPALA: Scalable Distributed Deep-RL with Importance Weighted Actor-Learner Architectures', 2018.
