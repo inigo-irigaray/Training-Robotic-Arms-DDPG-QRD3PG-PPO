@@ -127,27 +127,27 @@
 
 PAPERS:
 
-DPG
+D. Silver, G. Lever et al., 'Deterministic Policy Gradient Algorithms', 2014.
 
-DDPG
+T.P. Lillicrap, J.J. Hunt et al., 'Continuous Control with Deep Reinforcement Learning', 2015.
 
-C51(ADistributionalPerspective.......)
+G. Barth-Maron, M.W. Hoffman et al., 'Distributed Distributional Deterministic Policy Gradients', 2018.
 
-QR
+M.G. Bellemare, W. Dabney et al., 'ADistributionalPerspective on Reinforcement Learning', 2017.
 
-IQN
+W. Dabney, M. Rowland, M.G. Bellemare & R. Munos, 'Distributional Reinforcement Learning with Quantile Regression', 2017.
 
-D4PG
+W. Dabney, G. Ostrovski et al., 'Implicit Quantile Regression Networks for Distributional Reinforcement Learning', 2018.
 
 PPO
 
 GAE
 
-BatchNorm
+S. Ioffe & C. Szegedy, 'Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift', 2015.
 
-LayerNorm
+J.L. Ba, J.R. Kiros & G.E. Hinton, 'Layer Normalization', 2016.
 
-PrioBuff
+T. Schaul, J. Quan, I. Antonoglou & D. Silver, 'Prioritized Experience Replay', 2016.
 
 AcceleratedMethods4RL -- Ray implem
 
