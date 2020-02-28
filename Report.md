@@ -94,13 +94,15 @@
 
 ## 2. QR-D3PG
 
-#### Distributional Approaches to Reinforcement Learning
-
-. Why use them?
-
 #### Quantile Regression Distributional Deep Deterministic Policy Gradients (QR-D3PG)
 
-. Massive improvement.
+<p align=justify>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The previous approach (DDPG) calculates the estimated mean Q-value by approximating the value function. However, mean values usually hide significant information from the uderlying data. By directly approximating the value distribution for states and actions, a distributional critic is able to capture inherent stochasticity in the environment and better model high variance outcomes in the form of a probability distribution.</p>
+
+<p align=justify>&nbsp;&nbsp;&nbsp;&nbsp;One of the earliest approaches was <b>categorical distributions</b>, which assign probabilities a  fixed number of atoms predetrmined by the architect as a hyperparameter and trains it through Kullback-Leibler divergence ratio. While it offers some measure of difference between two distributions, KL-divergence fails to grasp the 'quality' of the difference, i.e. the mass or cost of the differences between the two. <b>Quantile Regression</b> distributional algorithms are based on the Wasserstein metric (or Earth Mover's Distance), which captures that information-rich cost magnitude, and is, therefore, more suitable for the task and implemented in this project. They approximate the cumulative distribution function by assigning equal probability to a N quantiles fixed as a parameter.</p> 
+    
+<p align=justify>&nbsp;&nbsp;&nbsp;&nbsp;Most of the algorithm design remains the same as in DDPG. However, the Critic outputs N values, each with a corresponging 1/N probability. In this implementation there are 5 quantiles of 0.2 likelihood each. The critic performs stochastic gradient descent on a <b>quantile huber loss</b>. This loss combines the classic huber loss with a measure tau calculated by the network. The classic huber loss is calculated as one half of the squared distance between the two distributions when the absolute value of that distance is fewer than a measure 'k' (k=1 in this implementation) and 'k' times the absolute value of that distance minus half 'k' otherwise <b>(1/2 distance if |distance| < 1.0  and 1.0 * (abs(distance) - 1/2 * 1.0) otherwise)</b>. It then multiplies this loss by the absolute value of the difference between tau and the calculated distance, to avoid under and overrepresentation errors. It finally calculates the mean value of that operation to perform stochastic gradient descen over it.</p>
+    
+<p align=justify>&nbsp;&nbsp;&nbsp;&nbsp;Finally, since the Critic network outputs a quantile distribution, the algorithm calculates the mean of that distribution and an additional mean of those values to perform gradient ascent on the estimated Q-value as in DDPG.</p>
 
 #### Normalization Layers
 
@@ -138,7 +140,14 @@
 
 ## 4. Comparative Analysis of Best-Performing Models
 
-· 
+
+<p align=center><img src=https://github.com/inigo-irigaray/Training-Robotic-Arms-DDPG-QRD3PG-PPO/blob/master/imgs/best/episode_reward_step.png height=330 width=650></p>
+
+<p align=center><sub>Episode reward per number of episodes. PPO Baseline (red), D3PG LayerNorm (blue), DDPG LayerNorm (orange)</sub></p>
+
+<p align=center><img src=https://github.com/inigo-irigaray/Training-Robotic-Arms-DDPG-QRD3PG-PPO/blob/master/imgs/best/episode_reward_time.png height=330 width=650></p>
+
+<p align=center><sub>Episode reward per training time. PPO Baseline (orange), D3PG LayerNorm (blue), DDPG LayerNorm (orange)</sub></p>
 
 ## 5. Future Work
 
