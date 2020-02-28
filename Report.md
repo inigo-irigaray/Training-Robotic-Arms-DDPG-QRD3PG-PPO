@@ -90,7 +90,7 @@
 
 #### PrioBuffer
 
-· Does not blend well with the algorithm, adds significant computational burden and time cost for not radical improvement in performace episode-wise. Change discarded.
+<p align=justify>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I finally implemented a Prioritized Experience Replay Buffer. However, since performance was already pretty robust at 125 episodes, there was not much room improvement and it added signifant overhead costs for computation. Additionally, it did not blend well with my batch and layer normalization implementations. It was, therefore, discarded as the simpler baseline experience replay was faster. To implement PER you will need to install OpenAI's baselines as a prerequisite, since I imported directly the Tree Search algorithms from there. For basic ER, it is not required.</p>
 
 ## 2. QR-D3PG
 
