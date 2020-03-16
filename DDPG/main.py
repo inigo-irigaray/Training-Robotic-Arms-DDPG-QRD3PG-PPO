@@ -46,8 +46,9 @@ def run(config):
     env_info = env.reset(train_mode=True)[brain_name]
     num_agents = len(env_info.agents)
 
-    ddpg = ddpg.DDPGAgent.init_from_env(env_info, brain, hid1=config.hid1, hid2=config.hid2, norm=config.norm,
-                                        lr=config.lr, epsilon=config.epsilon, gamma=config.gamma, tau=config.tau)
+    ddpg = ddpg.DDPGAgent.init_from_env(env_info, brain, hid1=config.hid1, hid2=config.hid2,
+                                        norm=config.norm, lr=config.lr, epsilon=config.epsilon,
+                                        gamma=config.gamma, tau=config.tau)
     print(ddpg.actor)
     print(ddpg.critic)
     repbuffer = buffer.ReplayBuffer(capacity=config.capacity, num_agents=num_agents)
@@ -76,7 +77,7 @@ def run(config):
                 mean_reward = np.mean(total_rewards)
                 writer.add_scalar('mean_episode_reward', mean_reward, episode)
                 print("Done episode %d for an average reward of %.3f in %.2f seconds, iteration %d."
-                % (episode, mean_reward, (time.time() - t), it))
+                      % (episode, mean_reward, (time.time() - t), it))
                 t = time.time()
                 reward_100.append(mean_reward)
                 break
@@ -94,7 +95,8 @@ def run(config):
 
         episode += 1
         if np.mean(reward_100) >= 30.0:
-            print("Solved the environment in %d episodes and %.2f minutes." % (episode, (time.time() / 60)))
+            print("Solved the environment in %d episodes and %.2f minutes."
+                  % (episode, (time.time() / 60)))
             env.close()
             break
 
