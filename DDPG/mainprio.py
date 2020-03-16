@@ -1,14 +1,12 @@
 import argparse
 import os
 import time
-import torch
-from torch.autograd import Variable
-from tensorboardX import SummaryWriter
-
-import numpy as np
-
 from collections import deque
 from pathlib import Path
+
+import numpy as np
+import torch
+from tensorboardX import SummaryWriter
 from unityagents import UnityEnvironment
 
 import buffer
@@ -22,22 +20,22 @@ def run(config):
     if not model_dir.exists():
         current_run = 'run1'
     else:
-        run_nums = [int(str(folder.name).split('run')[1]) 
+        run_nums = [int(str(folder.name).split('run')[1])
                         for folder in model_dir.iterdir() if str(folder.name).startswith('run')]
         if len(run_nums) == 0:
             current_run = 'run1'
         else:
             current_run = 'run%i' % (max(run_nums) + 1)
-            
+
     run_dir = model_dir / current_run
     logs_dir = run_dir / 'logs'
     os.makedirs(logs_dir)
-    
+
     writer = SummaryWriter(str(logs_dir))
-    
+
     torch.manual_seed(config.seed)
     np.random.seed(config.seed)
-    
+
     if torch.cuda.is_available() and config.cuda==True:
         cuda = True
     else:
@@ -47,7 +45,7 @@ def run(config):
     brain = env.brains[brain_name]
     env_info = env.reset(train_mode=True)[brain_name]
     num_agents = len(env_info.agents)
-    
+
     ddpg = ddpgprio.DDPGAgent.init_from_env(env_info, brain, hid1=config.hid1, hid2=config.hid2, norm=config.norm,
                                         lr=config.lr, epsilon=config.epsilon, gamma=config.gamma, tau=config.tau)
     print(ddpg.actor)
@@ -73,42 +71,42 @@ def run(config):
             rewards = env_info.rewards
             total_rewards += rewards
             dones = env_info.local_done
-            
+
             repbuffer.add(obs, actions, rewards, next_obs, dones)
-            
+
             if np.any(dones):
                 mean_reward = np.mean(total_rewards)
                 writer.add_scalar('mean_episode_reward', mean_reward, episode)
-                print("Done episode %d for an average reward of %.3f in %.2f seconds." % 
+                print("Done episode %d for an average reward of %.3f in %.2f seconds." %
                       (episode, mean_reward, (time.time() - t)))
                 t = time.time()
                 reward_100.append(mean_reward)
                 break
-                        
+
             obs = next_obs
             if repbuffer.filled > config.batch_size:
                 if cuda:
                     ddpg.prep_training(device='gpu')
                 else:
                     ddpg.prep_training(device='cpu')
-                    
+
                 sample = repbuffer.sample(beta=beta, batch_size=config.batch_size, to_gpu=True)
                 ddpg.update(sample, buffer=repbuffer, writer=writer)
                 ddpg.prep_rollouts(device='cpu')
-            
+
         episode += 1
         if np.mean(reward_100) >= 30.0:
             print("Solved the environment in %d episodes and %.2f minutes." % (episode, (time.time() / 60)))
             env.close()
             break
-            
+
     ddpg.save(run_dir / 'ddpgprio_robotic_arm.pt')
     env.close()
     writer.export_scalars_to_json(str(logs_dir / 'summary.json'))
     writer.close()
-            
-            
-            
+
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--env', default='/data/Reacher_Linux_NoVis/Reacher.x86_64',
@@ -129,8 +127,8 @@ if __name__ == '__main__':
     parser.add_argument('--beta', default=0.4, type=float)
     parser.add_argument('--beta_frames', default=100000, type=int)
     parser.add_argument('--alpha', default=0.6, type=float)
-    
+
 
     config = parser.parse_args()
-    
+
     run(config)
