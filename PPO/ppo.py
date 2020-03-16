@@ -168,8 +168,7 @@ class PPOAgent:
             ratio = torch.exp(logprobs[:-1] - old_logprobs[:-1])
             surr_obj = adv_est * ratio
             clipped_surr = adv_est * torch.clamp(ratio, 1.0 - self.eps, 1.0 + self.eps)
-            actor_loss = -torch.min(surr_obj, clipped_surr).mean() -
-                         0.01 * (torch.sum(entropy, dim=-1)).mean()
+            actor_loss = -torch.min(surr_obj, clipped_surr).mean() - 0.01 * (torch.sum(entropy, dim=-1)).mean()
             loss = actor_loss + critic_loss
             loss.backward()
             torch.nn.utils.clip_grad_norm(self.actor.parameters(), 0.75)
