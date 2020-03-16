@@ -6,7 +6,6 @@ from pathlib import Path
 
 import numpy as np
 import torch
-from torch.autograd import Variable
 from tensorboardX import SummaryWriter
 from unityagents import UnityEnvironment
 
