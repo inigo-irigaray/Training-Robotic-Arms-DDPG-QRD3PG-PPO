@@ -1,11 +1,8 @@
-import torch
 import operator
 import random
 
 import numpy as np
-
-from collections import deque
-from torch.autograd import Variable
+import torch
 
 
 
@@ -21,10 +18,10 @@ class ReplayBuffer:
         self.donememory = []
         self.filled = 0
         self.current = 0
-        
+
     def __len__(self):
         return self.filled
-    
+
     def add(self, observations, actions, rewards, nobservations, dones):
         for i in range(self.num_agents):
             if self.filled < self.capacity:
@@ -35,7 +32,7 @@ class ReplayBuffer:
                 self.rmemory.append(rewards[i])
                 self.nobsmemory.append(nobservations[i,:])
                 self.donememory.append(dones[i])
-            
+
             else: # when capacity is overblown, the buffer restarts storage from position 0
                 self.obsmemory[self.current % self.capacity] = observations[i,:]
                 self.actmemory[self.current % self.capacity] = actions[i,:]
@@ -43,7 +40,7 @@ class ReplayBuffer:
                 self.nobsmemory[self.current % self.capacity] = nobservations[i,:]
                 self.donememory[self.current % self.capacity] = dones[i]
                 self.current += 1
-        
+
     def sample(self, batch_size=1, to_gpu=False, norm_r=False):
         """ Random sampling experiences"""
         idxs = np.random.choice(np.arange(self.filled), size=batch_size, replace=False)
@@ -51,37 +48,37 @@ class ReplayBuffer:
         if to_gpu:
             device = 'cuda'
         # normalizes rewards automatically
-        if norm_r: # Note: It has empirically slowed down learning dramatically in my experiments for Reacher environment!
+        if norm_r: # Note: It slowed down learning dramatically in my experiments for Reacher environment!
             rewards = torch.from_numpy(np.vstack([
                 (self.rmemory[idx] - np.mean(self.rmemory[:self.filled])) /
                 np.std(self.rmemory[:self.filled]) for idx in idxs])).float().to(device)
         else:
             rewards = torch.from_numpy(np.vstack([self.rmemory[idx] for idx in idxs])).float().to(device)
-            
+
         return (torch.from_numpy(np.vstack([self.obsmemory[idx] for idx in idxs])).float().to(device),
                 torch.from_numpy(np.vstack([self.actmemory[idx] for idx in idxs])).float().to(device),
                 rewards,
                 torch.from_numpy(np.vstack([self.nobsmemory[idx] for idx in idxs])).float().to(device),
                 torch.from_numpy(np.vstack([self.donememory[idx] for idx in idxs]).astype(np.uint8)).to(device))
-    
+
     def get_average_rewards(self, N):
-        assert self.filled > N # checks that the agent has played the minimum required games for the task
+        assert self.filled > N # checks the agent played the minimum required games for the task
         if (self.current % self.capacity) < N:
             rewards_N = []
             rewards_N.append(self.rmemory[self.capacity-N-1:])
             rewards_N.append(self.rmemory[:self.current % self.capacity])
             return rewards_N.mean()
         return self.rmemory[self.capacity-N-1:].mean()
-    
-    
-    
-    
+
+
+
+
 class PrioritizedReplayBuffer(ReplayBuffer):
     def __init__(self, capacity, num_agents, alpha):
         super(PrioritizedReplayBuffer, self).__init__(capacity, num_agents)
         assert alpha > 0
         self._alpha = alpha
-        
+
         it_capacity = 1
         while it_capacity < self.capacity:
             it_capacity *= 2
@@ -89,13 +86,13 @@ class PrioritizedReplayBuffer(ReplayBuffer):
         self._it_sum = SumSegmentTree(it_capacity)
         self._it_min = MinSegmentTree(it_capacity)
         self._max_priority = 1.0
-    
+
     def add(self, *args, **kwargs):
         idx = self.current % self.capacity
         super().add(*args, **kwargs)
         self._it_sum[idx] = self._max_priority ** self._alpha
         self._it_min[idx] = self._max_priority ** self._alpha
-        
+
     def _sample_proportional(self, batch_size):
         res = []
         for _ in range(batch_size):
@@ -103,7 +100,7 @@ class PrioritizedReplayBuffer(ReplayBuffer):
             idx = self._it_sum.find_prefixsum_idx(mass)
             res.append(idx)
         return res
-        
+
     def sample(self, beta, batch_size=1, to_gpu=False, norm_r=False):
         assert beta > 0
         idxs = self._sample_proportional(batch_size)
@@ -119,7 +116,7 @@ class PrioritizedReplayBuffer(ReplayBuffer):
             p_sample = self._it_sum[idx] / self._it_sum.sum()
             weight = (p_sample * len(self)) ** (-beta)
             weights.append(weight / max_weight)
-            
+
         weights = np.array(weights, dtype=np.float32)
         # normalizes rewards automatically
         if norm_r:
@@ -128,7 +125,7 @@ class PrioritizedReplayBuffer(ReplayBuffer):
                 np.std(self.rmemory[:self.filled]) for idx in idxs])).float().to(device)
         else:
             rewards = torch.from_numpy(np.vstack([self.rmemory[idx] for idx in idxs])).float().to(device)
-            
+
         return (torch.from_numpy(np.vstack([self.obsmemory[idx] for idx in idxs])).float().to(device),
                 torch.from_numpy(np.vstack([self.actmemory[idx] for idx in idxs])).float().to(device),
                 rewards,
@@ -136,7 +133,7 @@ class PrioritizedReplayBuffer(ReplayBuffer):
                 torch.from_numpy(np.vstack([self.donememory[idx] for idx in idxs]).astype(np.uint8)).to(device),
                 idxs,
                 weights)
-        
+
     def update_priorities(self, idxs, prios):
         assert len(idxs) == len(prios)
         for idx, priority in zip(idxs, prios):
@@ -146,11 +143,11 @@ class PrioritizedReplayBuffer(ReplayBuffer):
             self._it_min[idx] = priority ** self._alpha
 
             self._max_priority = max(self._max_priority, priority)
-    
-    
 
-    
-"""Code imported from OpenAI's baselines @ https://github.com/openai/baselines/blob/master/baselines/common/segment_tree.py."""    
+
+
+
+"""Code imported from OpenAI's baselines @ https://github.com/openai/baselines/blob/master/baselines/common/segment_tree.py."""
 class SegmentTree(object):
     def __init__(self, capacity, operation, neutral_element):
         """Build a Segment Tree data structure.
@@ -233,8 +230,8 @@ class SegmentTree(object):
         assert 0 <= idx < self._capacity
         return self._value[self._capacity + idx]
 
-    
-    
+
+
 
 class SumSegmentTree(SegmentTree):
     def __init__(self, capacity):
@@ -273,8 +270,8 @@ class SumSegmentTree(SegmentTree):
                 idx = 2 * idx + 1
         return idx - self._capacity
 
-    
-    
+
+
 
 class MinSegmentTree(SegmentTree):
     def __init__(self, capacity):
@@ -287,4 +284,4 @@ class MinSegmentTree(SegmentTree):
     def min(self, start=0, end=None):
         """Returns min(arr[start], ...,  arr[end])"""
 
-        return super(MinSegmentTree, self).reduce(start, end)    
+        return super(MinSegmentTree, self).reduce(start, end)
