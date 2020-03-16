@@ -21,7 +21,7 @@ def run(config):
         current_run = 'run1'
     else:
         run_nums = [int(str(folder.name).split('run')[1])
-                        for folder in model_dir.iterdir() if str(folder.name).startswith('run')]
+                    for folder in model_dir.iterdir() if str(folder.name).startswith('run')]
         if len(run_nums) == 0:
             current_run = 'run1'
         else:
@@ -75,8 +75,8 @@ def run(config):
             if np.any(dones):
                 mean_reward = np.mean(total_rewards)
                 writer.add_scalar('mean_episode_reward', mean_reward, episode)
-                print("Done episode %d for an average reward of %.3f in %.2f seconds, iteration %d." %
-                      (episode, mean_reward, (time.time() - t), it))
+                print("Done episode %d for an average reward of %.3f in %.2f seconds, iteration %d."
+                % (episode, mean_reward, (time.time() - t), it))
                 t = time.time()
                 reward_100.append(mean_reward)
                 break
