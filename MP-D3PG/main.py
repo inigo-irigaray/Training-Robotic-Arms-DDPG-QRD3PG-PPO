@@ -1,16 +1,67 @@
 import argparse
-import os
+import multiprocessing as mp
 import time
-from collections import deque
-from pathlib import Path
 
-import numpy as np
-import torch
+import torch.multiprocessing as tmp
 from tensorboardX import SummaryWriter
-from unityagents import UnityEnvironment
 
-import buffer
-import ddpg
+from agent import D3PGAgent
+from buffer import ReplayBuffer
+from learner import Learner
+
+
+
+
+def sampler_worker(config, num_in_agents, train, replay_queue, batch_queue):
+    """
+    Function that transfers replay to the buffer and batches from buffer to the queue.
+    """
+    # Creates replay buffer
+    repbuffer = ReplayBuffer(capacity=config.capacity, num_agents=num_in_agents)
+
+    while train.value:
+        # Transfers transitions to replay buffer
+        n = replay_queue.qsize()
+        for _ in range(n):
+            transition = replay_queue.get() ### CHECK HERE FOR SOLVING ENV???
+            repbuffer.add(*transition)
+
+        # Transfers sample batch from buffer to the batch_queue
+        if repbuffer.filled < config.batch_size:
+            continue
+
+        try:
+            sample = repbuffer.sample(config.batch_size)
+            batch_queue.put_nowait(sample)
+        except:
+            time.sleep(0.1)
+            continue
+
+    # Clears batch_queue
+    while True:
+        try:
+            clearer = batch_queue.get_nowait()
+            del clearer
+        except:
+            break
+    batch_queue.close()
+
+
+
+
+def learner_worker(config, obs_size, act_size, hid1, hid2, norm, actor, tgt_actor,
+                   lr, learner_queue, gamma, tau, batch_queue, update_step, train,
+                   device='cpu', writer=None, filename=''):
+    learn = Learner(config, obs_size, act_size, hid1, hid2, norm, actor,
+                    tgt_actor, lr, learner_queue, gamma, tau)
+    learn.run(batch_queue, update_step, train, device, writer, filename)
+
+
+
+
+def agent_worker(config, actor, global_episode, agent_id=0, explore=True, writer=None):
+    agent = D3PGAgent(config, actor, global_episode, agent_id=0, explore=True)
+    agent.run(train, replay_queue, learner_queue, writer=None)
 
 
 
@@ -36,78 +87,61 @@ def run(config):
     torch.manual_seed(config.seed)
     np.random.seed(config.seed)
 
-    if torch.cuda.is_available() and config.cuda==True:
+    if torch.cuda.is_available() and self.config.cuda==True:
         cuda = True
     else:
         cuda = False
-    env = UnityEnvironment(file_name=config.env)
-    brain_name = env.brain_names[0]
-    brain = env.brains[brain_name]
-    env_info = env.reset(train_mode=True)[brain_name]
-    num_agents = len(env_info.agents)
 
-    ddpg = ddpg.DDPGAgent.init_from_env(env_info, brain, hid1=config.hid1, hid2=config.hid2,
-                                        norm=config.norm, lr=config.lr, epsilon=config.epsilon,
-                                        gamma=config.gamma, tau=config.tau)
-    print(ddpg.actor)
-    print(ddpg.critic)
-    repbuffer = buffer.ReplayBuffer(capacity=config.capacity, num_agents=num_agents)
-    episode = 0
-    reward_100 = deque(maxlen=100)
-    while True:
-        env_info = env.reset(train_mode=True)[brain_name]
-        obs = env_info.vector_observations
-        ddpg.prep_rollouts(device='cpu')
-        total_rewards = np.zeros(num_agents)
-        t = time.time()
-        it = 0
-        while True:
-            it += 1
-            obs = torch.FloatTensor(np.vstack(obs))
-            actions = ddpg.step(obs, explore=True)
-            env_info = env.step(actions)[brain_name]
-            next_obs = env_info.vector_observations
-            rewards = env_info.rewards
-            total_rewards += rewards
-            dones = env_info.local_done
+    batch_queue_size = config.batch_queue
+    n_agents = config.num_agents
 
-            repbuffer.add(obs, actions, rewards, next_obs, dones)
+    # Communication tools across workers
+    processes = []
+    replay_queue = mp.Queue(maxsize=64)
+    train = mp.Value('i', True)
+    update_step = mp.Value('i', 0)
+    global_episode = mp.Value('i', 0)
+    learner_queue = tmp.Queue(maxsize=n_agents)
+    batch_queue = mp.Queue(maxsize=batch_queue_size)
 
-            if np.any(dones):
-                mean_reward = np.mean(total_rewards)
-                writer.add_scalar('mean_episode_reward', mean_reward, episode)
-                print("Done episode %d for an average reward of %.3f in %.2f seconds, iteration %d."
-                      % (episode, mean_reward, (time.time() - t), it))
-                t = time.time()
-                reward_100.append(mean_reward)
-                break
+    # Data sampling process
+    p = tmp.Process(target=sampler_worker,
+                    args=(config, replay_queue, batch_queue, train,
+                          global_episode, update_step, experiment_dir))
+    processes.append(p)
 
-            obs = next_obs
-            if repbuffer.filled > config.batch_size:
-                if cuda:
-                    ddpg.prep_training(device='gpu')
-                else:
-                    ddpg.prep_training(device='cpu')
+    # Learner training process
+    actor = Actor(obs_size, act_size, hid1=400, hid2=300, norm='layer')
+    tgt_actor = TargetModel(actor)
+    # policy_net_cpu = PolicyNetwork(config['state_dim'], config['action_dim'],
+                                      #config['dense_size'], device=config['agent_device'])
 
-                sample = repbuffer.sample(batch_size=config.batch_size, to_gpu=True)
-                ddpg.update(sample, writer=writer)
-                ddpg.prep_rollouts(device='cpu')
+    tgt_actor.share_memory()
 
-        episode += 1
-        if np.mean(reward_100) >= 30.0:
-            print("Solved the environment in %d episodes and %.2f minutes."
-                  % (episode, (time.time() / 60)))
-            env.close()
-            break
+    p = tmp.Process(target=learner_worker, args=(config, actor, tgt_actor, learner_queue, # training_on
+                                                 batch_queue, update_step, experiment_dir))
+    processes.append(p)
 
-    ddpg.save(run_dir / 'ddpg_robotic_arm.pt')
-    env.close()
-    writer.export_scalars_to_json(str(logs_dir / 'summary.json'))
-    writer.close()
+    # Single agent for exploitation
+    p = tmp.Process(target=agent_worker, args=(config, tgt_actor, None, global_episode, 0, explore=False,
+                                               experiment_dir, replay_queue, update_step)) # training_on
+    processes.append(p)
 
+    # Agents' exploring process
+    for i in range(1, n_agents):
+        p = tmp.Process(target=agent_worker,
+                        args=(config, actor.to('cpu'), learner_queue, global_episode, i, "exploration", experiment_dir,
+                                   replay_queue, update_step)) # training_on
+        processes.append(p)
 
+    for p in processes:
+        p.start()
+    for p in processes:
+        p.join()
 
-if __name__ == '__main__':
+    print("End of all processes.")
+
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--env', default='/data/Reacher_Linux_NoVis/Reacher.x86_64',
                         required=True, help='Path to environment file.', type=str)
