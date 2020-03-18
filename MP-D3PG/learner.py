@@ -106,8 +106,7 @@ class Learner:
                      'tgt_actor': self.tgt_actor.tgt_model.state_dict(),
                      'tgt_critic': self.tgt_critic.tgt_model.state_dict(),
                      'actor_optim': self.actor_optim.state_dict(),
-                     'critic_optim': self.critic_optim.state_dict(),
-                     'init_dict': self.init_dict}
+                     'critic_optim': self.critic_optim.state_dict()}
         torch.save(save_dict, filename)
 
     def run(self, batch_queue, update_step, train, device='cpu', writer=None, filename=""): # training_on

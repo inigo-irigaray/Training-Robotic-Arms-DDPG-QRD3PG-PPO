@@ -1,5 +1,6 @@
 import argparse
 import multiprocessing as mp
+import os
 import time
 
 import torch.multiprocessing as tmp
@@ -12,12 +13,12 @@ from learner import Learner
 
 
 
-def sampler_worker(config, num_in_agents, train, replay_queue, batch_queue):
+def sampler_worker(config, n_agents, train, replay_queue, batch_queue):
     """
     Function that transfers replay to the buffer and batches from buffer to the queue.
     """
     # Creates replay buffer
-    repbuffer = ReplayBuffer(capacity=config.capacity, num_agents=num_in_agents)
+    repbuffer = ReplayBuffer(capacity=config.capacity, num_agents=n_agents)
 
     while train.value:
         # Transfers transitions to replay buffer
@@ -60,8 +61,8 @@ def learner_worker(config, obs_size, act_size, hid1, hid2, norm, actor, tgt_acto
 
 
 def agent_worker(config, actor, global_episode, agent_id=0, explore=True, writer=None):
-    agent = D3PGAgent(config, actor, global_episode, agent_id=0, explore=True)
-    agent.run(train, replay_queue, learner_queue, writer=None)
+    agent = D3PGAgent(config, actor, global_episode, agent_id, explore)
+    agent.run(train, replay_queue, learner_queue, writer)
 
 
 
@@ -81,6 +82,7 @@ def run(config):
     run_dir = model_dir / current_run
     logs_dir = run_dir / 'logs'
     os.makedirs(logs_dir)
+    saves_dir = run_dir / 'ddpg_robotic_arm.pt'
 
     writer = SummaryWriter(str(logs_dir))
 
@@ -88,12 +90,12 @@ def run(config):
     np.random.seed(config.seed)
 
     if torch.cuda.is_available() and self.config.cuda==True:
-        cuda = True
+        device = 'gpu'
     else:
-        cuda = False
+        device = 'cpu'
 
     batch_queue_size = config.batch_queue
-    n_agents = config.num_agents
+    n_agents = config.n_agents
 
     # Communication tools across workers
     processes = []
@@ -104,34 +106,39 @@ def run(config):
     learner_queue = tmp.Queue(maxsize=n_agents)
     batch_queue = mp.Queue(maxsize=batch_queue_size)
 
+    env = UnityEnvironment(file_name=config.env)
+    brain_name = env.brain_names[0]
+    brain = env.brains[brain_name]
+    env_info = env.reset(train_mode=True)[brain_name]
+    obs_size = env_info.vector_observations.shape[1]
+    act_size = brain.vector_action_space_size
+
     # Data sampling process
     p = tmp.Process(target=sampler_worker,
-                    args=(config, replay_queue, batch_queue, train,
-                          global_episode, update_step, experiment_dir))
+                    args=(config, n_agents, train, replay_queue, batch_queue))
     processes.append(p)
 
     # Learner training process
     actor = Actor(obs_size, act_size, hid1=400, hid2=300, norm='layer')
     tgt_actor = TargetModel(actor)
-    # policy_net_cpu = PolicyNetwork(config['state_dim'], config['action_dim'],
-                                      #config['dense_size'], device=config['agent_device'])
-
     tgt_actor.share_memory()
 
-    p = tmp.Process(target=learner_worker, args=(config, actor, tgt_actor, learner_queue, # training_on
-                                                 batch_queue, update_step, experiment_dir))
+    p = tmp.Process(target=learner_worker,
+                    args=(config, obs_size, act_size, config.hid1, config.hid2, config.norm, actor,
+                         tgt_actor, config.lr, learner_queue, config.gamma, config.tau, batch_queue,
+                         update_step, train, device=device, writer=writer, filename=saves_dir))
     processes.append(p)
 
     # Single agent for exploitation
-    p = tmp.Process(target=agent_worker, args=(config, tgt_actor, None, global_episode, 0, explore=False,
-                                               experiment_dir, replay_queue, update_step)) # training_on
+    p = tmp.Process(target=agent_worker,
+                    args=(config, actor, global_episode, agent_id=0, explore=False, writer=writer))
     processes.append(p)
 
     # Agents' exploring process
     for i in range(1, n_agents):
         p = tmp.Process(target=agent_worker,
-                        args=(config, actor.to('cpu'), learner_queue, global_episode, i, "exploration", experiment_dir,
-                                   replay_queue, update_step)) # training_on
+                        args=(config, actor.to('cpu'), config, actor, global_episode,
+                              agent_id=i, explore=True, writer=writer))
         processes.append(p)
 
     for p in processes:
