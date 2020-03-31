@@ -2,7 +2,7 @@
 
 ### Preliminaries
 
-<p align=justify>(Accompanying full report <a href=https://github.com/inigo-irigaray/Training-Robotic-Arms-DDPG-QRD3PG-PPO/blob/master/Report.md><b>here.</b></a>)
+<p align=justify>(Accompanying full report <a href=https://github.com/inigo-irigaray/Training-Robotic-Arms-DDPG-QRD3PG-PPO/blob/master/Report.md><b>here.</b></a> - in progress)
  
 <p align=justify>(Accompanying Udacity report <a href=https://github.com/inigo-irigaray/Training-Robotic-Arms-DDPG-QRD3PG-PPO/blob/master/ReportUdacity.md><b>here.</b></a>)
 
